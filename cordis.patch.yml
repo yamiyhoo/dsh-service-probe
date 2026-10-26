@@ -1,0 +1,19 @@
+# ============================================================================
+# dsh-service-probe — DSH bundle patch
+# ============================================================================
+# This file is the mount declaration: DSH reads `dsh.bundle.patch` from
+# package.json and inserts the row below into the profile's config tree.
+#
+# `required: false` on purpose. A probe that cannot resolve must not be able to
+# stop a Host from booting — on the desktop application that would mean the
+# person's app not starting. If the row is skipped, nothing is logged, and that
+# absence is the signal.
+#
+# The row's `name` must match package.json's `name`: DSH resolves the build
+# artifact (`main`, here `index.cjs`) by it.
+# ============================================================================
+
+- insert:
+    - id: dsh-service-probe
+      name: dsh-service-probe
+      required: false
